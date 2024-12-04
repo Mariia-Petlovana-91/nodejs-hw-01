@@ -1,4 +1,6 @@
 import { createFakeContact } from "../utils/createFakeContact.js";
+import { readContacts } from "../utils/readContacts.js";
+import { writeContacts } from "../utils/writeContacts.js";
 
 const generateContacts = async (number) => {
 	// const arr = [];
@@ -6,9 +8,11 @@ const generateContacts = async (number) => {
 	// 	let contact = createFakeContact();
 	// 	arr.push(contact);
 	// }
-
+      const contacts = await readContacts();
 	const newContacts = Array(number).fill({}).map(createFakeContact);
-	console.log(newContacts);
+	const newList = [...contacts, ...newContacts];
+	await writeContacts(newList);
+
 };
 
 generateContacts(2);
